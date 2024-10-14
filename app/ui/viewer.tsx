@@ -10,7 +10,7 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
 
     stage
       .loadFile(pdbUrl)
-      .then(function (component) {
+      .then(function (component: any) {
         component.removeAllRepresentations();
         component.addRepresentation(persp);
         component.autoView();
