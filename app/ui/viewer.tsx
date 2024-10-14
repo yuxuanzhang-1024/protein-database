@@ -21,9 +21,9 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
       });
 
     return () => {
-      stage;
+      stage
     };
-  }, [pdbUrl, persp]);
+  }, [pdbUrl, persp, check]);
 
   return <div id="viewport" style={{ width: "610px", height: "541px" }} />
 }
