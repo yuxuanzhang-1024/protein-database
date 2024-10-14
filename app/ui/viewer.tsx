@@ -6,8 +6,6 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
   useEffect(() => {
     const stage = new Stage("viewport", {
       backgroundColor: "#F1FCEB",
-      width: "610px",
-      height: "541px",
     });
 
     stage
@@ -21,7 +19,7 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
 
     return () => {
       // delete const stage
-      stage.dispose();
+      stage;
     };
   }, [pdbUrl, persp]);
 
