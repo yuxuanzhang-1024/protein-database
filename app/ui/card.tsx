@@ -1,11 +1,14 @@
 import React from 'react';
 import { ProteinType } from '../lib/definitions';
+import Image from 'next/image';
 
 export default function ProteinCard(protein: ProteinType) {
-  const { id, ID, GLN, pLDDT, BSA, Core_GLN, Symmetry, Proteome, File_Url, Image_Url } = protein;
+  const ID = protein.ID;
+  const Image_Url = protein.Image_Url
   return (
     <div className="card bg-base-100 w-96 shadow-xl">
       <figure>
+        {/* <Image src={Image_Url} alt={ID} width={300} height={300} /> */}
         <img src={Image_Url} alt={ID} />
       </figure>
       <div className="card-body">
