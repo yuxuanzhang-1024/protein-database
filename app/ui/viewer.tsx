@@ -20,7 +20,8 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
       });
 
     return () => {
-      stage
+      // delete const stage
+      stage.dispose();
     };
   }, [pdbUrl, persp]);
 
