@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { Stage } from "ngl";
 
 export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: string }) {
- const check = persp
   useEffect(() => {
     const stage = new Stage("viewport", {
       backgroundColor: "#F1FCEB",
@@ -15,7 +14,7 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
       .loadFile(pdbUrl)
       .then(function (component) {
         component.removeAllRepresentations();
-        component.addRepresentation(check);
+        component.addRepresentation(persp);
         component.autoView();
         // console.log(component.structure.atomCount);
       });
@@ -23,7 +22,7 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
     return () => {
       stage
     };
-  }, [pdbUrl, persp, check]);
+  }, [pdbUrl, persp]);
 
   return <div id="viewport" style={{ width: "610px", height: "541px" }} />
 }
