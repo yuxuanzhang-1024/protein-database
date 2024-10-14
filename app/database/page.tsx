@@ -1,4 +1,4 @@
-import NglViewer from "../ui/Viewer";
+import NglViewer from "../ui/viewer";
 import { fetchProteinById } from "../lib/data";
 import ProteinCard from "../ui/card";
 
