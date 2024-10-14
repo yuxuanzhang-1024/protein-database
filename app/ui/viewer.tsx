@@ -16,11 +16,6 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
         component.autoView();
         // console.log(component.structure.atomCount);
       });
-
-    return () => {
-      // delete const stage
-      stage;
-    };
   }, [pdbUrl, persp]);
 
   return <div id="viewport" style={{ width: "610px", height: "541px" }} />
