@@ -1,6 +1,5 @@
 import Pagination from "../ui/pagination";
-import NglViewer from "../ui/viewer";
-import { fetchNumProteinPages, fetchProteinById, fetchProteins } from "../lib/data";
+import { fetchProteins } from "../lib/data";
 // import ProteinCard from "../ui/card";
 import ProteinGallery from "../ui/board";
 import { Suspense } from "react";
