@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
-export const generateProtiensPerPage=() => {
+export const useGenerateProtiensPerPage=() => {
     const [proteinsPerPage, setProteinsPerPage] = useState(12);
     useEffect(() => {
         const handleResize = () => {

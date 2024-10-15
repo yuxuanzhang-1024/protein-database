@@ -2,9 +2,8 @@
 import React from "react";
 
 import { ProteinType } from "../lib/definitions";
-import { fetchProteinsByPage, fetchNumProteinPages, fetchProteins } from "../lib/data";
 import ProteinCard from "./card";
-import { generateProtiensPerPage } from "../lib/utils";
+import { useGenerateProtiensPerPage } from "../lib/utils";
 
 export default function ProteinGallery({ Proteins, currentPage}: 
     { Proteins: ProteinType[]; currentPage: number})
@@ -27,7 +26,7 @@ export default function ProteinGallery({ Proteins, currentPage}:
             
         //     return () => window.removeEventListener("resize", handleResize);
         //   }, []);
-        const proteinsPerPage = generateProtiensPerPage();
+        const proteinsPerPage = useGenerateProtiensPerPage();
         const currentProteins = Proteins.slice((currentPage - 1) * proteinsPerPage, currentPage * proteinsPerPage);
         
         return (

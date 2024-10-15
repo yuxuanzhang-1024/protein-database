@@ -27,11 +27,13 @@ export default function ProteinCard(protein: ProteinType) {
   const File_Url = protein.File_Url
   return (
     <div className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 focus-within:ring-2 focus-within:ring-blue-500">
-      <img
+      <Image
         src={Image_Url}
         alt={ID}
         className="w-full h-48 object-cover transition-opacity duration-300 hover:opacity-80"
         loading="lazy"
+        width={500}
+        height={500}
       />
       <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
         <h3 className="text-white text-lg font-semibold">{ID}</h3>

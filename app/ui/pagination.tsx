@@ -2,7 +2,7 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import clsx from 'clsx';
 import Link from 'next/link';
-import { generatePagination, generateProtiensPerPage } from '../lib/utils';
+import { generatePagination, useGenerateProtiensPerPage } from '../lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { ProteinType } from "../lib/definitions";
 export default function Pagination({ Proteins}: { Proteins: ProteinType[]}) {
@@ -10,7 +10,7 @@ export default function Pagination({ Proteins}: { Proteins: ProteinType[]}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
-    const proteinsPerPage = generateProtiensPerPage();
+    const proteinsPerPage = useGenerateProtiensPerPage();
     const totalPages = Math.ceil(Proteins.length / proteinsPerPage);
   const allPages = generatePagination(currentPage, totalPages);
     console.log(allPages);

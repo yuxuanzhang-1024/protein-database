@@ -1,7 +1,7 @@
 import NglViwer from '../../ui/viewer';
 import { fetchProteinById } from '../../lib/data';
 import React from "react";
-import { FaInfoCircle, FaSearch } from "react-icons/fa";
+import { FaInfoCircle} from "react-icons/fa";
 
 export default async function Page({params}: {params: {id: string;}})
 {
