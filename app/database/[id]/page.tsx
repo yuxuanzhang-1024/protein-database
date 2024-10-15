@@ -6,7 +6,7 @@ import { FaInfoCircle} from "react-icons/fa";
 export default async function Page({params}: {params: {id: string;}})
 {
     const id = params.id;
-    const protein = await fetchProteinById('670c98d5483fbe888f0ee59d');
+    const protein = await fetchProteinById(id);
     console.log(id);
     console.log(protein);
     const proteinData = {
