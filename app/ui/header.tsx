@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const Header = () => {
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md shadow-lg">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         <div className="text-4xl font-bold text-gray-800 font-sans">
           <Link href="/">

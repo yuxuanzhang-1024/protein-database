@@ -5,11 +5,11 @@ import { Stage } from "ngl";
 export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: string }) {
   useEffect(() => {
     const stage = new Stage("viewport", {
-      backgroundColor: "#F1FCEB",
+      backgroundColor: "#F9FAFB",
     });
 
-    stage
-      .loadFile(pdbUrl)
+    // stage.setSize("100%")
+    stage.loadFile(pdbUrl)
       .then(function (component: any) {
         component.removeAllRepresentations();
         component.addRepresentation(persp);
@@ -17,6 +17,7 @@ export default function NglViewer({ pdbUrl, persp }: { pdbUrl: string; persp: st
         // console.log(component.structure.atomCount);
       });
   }, [pdbUrl, persp]);
+  
 
-  return <div id="viewport" style={{ width: "610px", height: "541px" }} />
+  return <div id="viewport" style={{ width: "500px", height: "500px" }}></div>;
 }
