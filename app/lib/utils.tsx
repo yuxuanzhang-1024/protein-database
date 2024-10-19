@@ -1,15 +1,17 @@
 'use client';
 import { useEffect, useState } from "react";
+import { ProteinFilterType } from "./definitions";
+import { ProteinType } from "./definitions";
 export const useGenerateProtiensPerPage=() => {
-    const [proteinsPerPage, setProteinsPerPage] = useState(12);
+    const [proteinsPerPage, setProteinsPerPage] = useState(24);
     useEffect(() => {
         const handleResize = () => {
         if (window.innerWidth < 640) {
-            setProteinsPerPage(3);
-        } else if (window.innerWidth < 1024) {
             setProteinsPerPage(6);
-        } else {
+        } else if (window.innerWidth < 1024) {
             setProteinsPerPage(12);
+        } else {
+            setProteinsPerPage(24);
         }
         };
 
@@ -21,6 +23,46 @@ export const useGenerateProtiensPerPage=() => {
     return proteinsPerPage;
 }
 
+export const symmetryOptions = ()=>{
+  return [{label:'C2'}, {label:'C3'}, {label:'All'}];
+}
+
+export const generateDefaultSearchConfig = ({proteins}:{proteins: ProteinType[]}) => {
+  return {
+    Uniprot_ID: '',
+    // 
+    minGLN: Math.floor(Math.min(...proteins.map((protein) => protein.GLN))),
+    maxGLN: Math.floor(Math.max(...proteins.map((protein) => protein.GLN)))+1,
+    minpLDDT: Math.floor(Math.min(...proteins.map((protein) => protein.pLDDT))),
+    maxpLDDT: Math.floor(Math.max(...proteins.map((protein) => protein.pLDDT)))+1,
+    minBSA: Math.floor(Math.min(...proteins.map((protein) => protein.BSA))/100)*100,
+    maxBSA: Math.floor(Math.max(...proteins.map((protein) => protein.BSA))/100)*100+100,
+    minCore_GLN: Math.floor(Math.min(...proteins.map((protein) => protein.Core_GLN))),
+    maxCore_GLN: Math.floor(Math.max(...proteins.map((protein) => protein.Core_GLN)))+1,
+    Symmetry: 'All',
+  };
+}
+
+
+export const useProteinFilterCondition = () => {
+  const [useProteinFilterCondition, setUseProteinFilterCondition] = useState<ProteinFilterType>({
+    Uniprot_ID: '',
+    minGLN: 0,
+    maxGLN: 100,
+    minpLDDT: 0,
+    maxpLDDT: 100,
+    minBSA: 0,
+    maxBSA: 100,
+    minCore_GLN: 0,
+    maxCore_GLN: 100,
+    Symmetry: '',
+  });
+
+  return {
+    useProteinFilterCondition,
+    setUseProteinFilterCondition
+  };
+}
 export const generatePagination = (currentPage: number, totalPages: number) => {
     // If the total number of pages is 7 or less,
     // display all pages without any ellipsis.

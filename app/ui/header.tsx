@@ -1,37 +1,50 @@
+"use client"
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-
+import { motion } from "framer-motion";
+import { FaHome, FaDatabase, FaInfoCircle } from "react-icons/fa";
 export const Header = () => {
   return (
-    <header className="bg-white shadow-md shadow-lg">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        <div className="text-4xl font-bold text-gray-800 font-sans">
-          <Link href="/">
-            <Image 
-              src="/protein.ico" 
-              alt="Protein Database" 
-              width={50} 
-              height={50} />
-          </Link>
-        </div>
-        <nav className="flex space-x-10">
-          <Link href="/">
-            <p className="text-gray-800 hover:text-gray-600 font-sans">Home</p>
-          </Link>
-          <Link href="/database">
-            <p className="text-gray-800 hover:text-gray-600 font-sans">Database</p>
-          </Link>
-          <a href="https://hanyugao.com/">
-            <p className="text-gray-800 hover:text-gray-600 font-sana">About Us</p>
-          </a>
-          <Link href="/about">
-          <div className="flex items-center text-gray-800 hover:text-gray-600 font-sans">
-              <p className="order-1">Github</p>
-            </div>
-          </Link>
-        </nav>
-      </div>
-    </header>
+    <header className="bg-blue-500 text-white p-4 shadow-md">
+    <div className="container mx-auto flex justify-between items-center">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-2xl font-bold">TangleDB</h1>
+      </motion.div>
+      <nav>
+        <motion.ul
+          className="flex space-x-10"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, staggerChildren: 0.1 }}
+        >
+          <motion.li whileHover={{ scale: 1.1 }}>
+            <Link href="/">
+              <button className="flex items-center" aria-label="Home">
+                <FaHome className="mr-1" /> Home
+              </button>
+            </Link>
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.1 }}>
+            <Link href="/database">
+              <button className="flex items-center" aria-label="Database">
+                <FaDatabase className="mr-1" /> Database
+              </button>
+            </Link>
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.1 }}>
+            <a href="https://hanyugao.com">
+              <button className="flex items-center" aria-label="About Us">
+                <FaInfoCircle className="mr-1" /> About Us
+              </button>
+            </a>
+          </motion.li>
+        </motion.ul>
+      </nav>
+    </div>
+  </header>
   );
 };

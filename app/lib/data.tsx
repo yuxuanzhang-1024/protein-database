@@ -1,9 +1,42 @@
 import { PrismaClient } from '@prisma/client';
-import { ProteinType } from './definitions';
+import { ProteinType, ProteinFilterType } from './definitions';
+import { tr } from 'framer-motion/client';
+
 const prisma = new PrismaClient();
 
 export async function fetchAllProteins() {
-  return await prisma.protein.findMany();
+  return await prisma.protein.findMany() as ProteinType[];
+}
+
+export function Filter({proteins, filterCondition, prop_type, value}: {
+  proteins: ProteinType[]; 
+  filterCondition: ProteinFilterType;
+  prop_type: string;
+  value: any;}) {
+    let truefilterCondition = { ...filterCondition };
+
+    if (prop_type === 'GLN' || prop_type === 'pLDDT' || prop_type === 'BSA' || prop_type === 'Core_GLN') {
+      truefilterCondition = { ...filterCondition, ['min' + prop_type]: value[0], ['max' + prop_type]: value[1] };
+    } else {
+      truefilterCondition = { ...filterCondition, [prop_type]: value };
+    }  const filteredProteins = proteins.filter((protein) => {
+    return (
+      protein.Uniprot_ID.includes(truefilterCondition.Uniprot_ID) &&
+      protein.GLN >= truefilterCondition.minGLN &&
+      protein.GLN <= truefilterCondition.maxGLN &&
+      protein.pLDDT >= truefilterCondition.minpLDDT &&
+      protein.pLDDT <= truefilterCondition.maxpLDDT &&
+      protein.BSA >= truefilterCondition.minBSA &&
+      protein.BSA <= truefilterCondition.maxBSA &&
+      protein.Core_GLN >= truefilterCondition.minCore_GLN &&
+      protein.Core_GLN <= truefilterCondition.maxCore_GLN
+    );
+  });
+  if (truefilterCondition.Symmetry !== 'All') {
+    const symmetry = truefilterCondition.Symmetry.charAt(0).toLowerCase() + truefilterCondition.Symmetry.slice(1);
+    return filteredProteins.filter((protein) => protein.Symmetry === symmetry);
+  }
+  return filteredProteins;
 }
 
 export async function fetchProteinById(proteinId: string) {
@@ -12,65 +45,3 @@ export async function fetchProteinById(proteinId: string) {
   });
   return protein as ProteinType;
 }
-
-
-export async function fetchNumProteinPages(
-  query:string, 
-  proteinsPerPage: number
-) {
-  try {
-    const proteins = await prisma.protein.findMany({
-      where: {
-        ID: {
-          contains: query,
-        },
-      },
-    });
-    const pages = Math.ceil(proteins.length / proteinsPerPage);
-    return pages;
-  }catch(error){
-    console.error("Database Error", error);
-    throw new Error("Error in fetching the number of protein pages");
-  }
-}
-
-export async function fetchProteins(
-  query:string, 
-) {
-  try {
-    const proteins = await prisma.protein.findMany({
-      where: {
-        ID: {
-          contains: query,
-        },
-      },
-    });
-    return proteins;
-  }catch(error){
-    console.error("Database Error", error);
-    throw new Error("Error in fetching proteins");
-  }
-}
-
-export async function fetchProteinsByPage(
-  currentPage: number,
-  query: string,
-  proteinsPerPage: number
-){
-  try {
-    const proteins = await prisma.protein.findMany({
-      where: {
-        ID: {
-          contains: query,
-        },
-      },
-      skip: (currentPage - 1) * proteinsPerPage,
-      take: proteinsPerPage,
-    });
-    return proteins;
-  }catch(error){
-    console.error("Database Error", error);
-    throw new Error("Error in fetching proteins by page");
-  }
-}
-

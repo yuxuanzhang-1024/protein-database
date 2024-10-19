@@ -8,14 +8,14 @@ generator client {
 }
 
 model Protein {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ID        String
-  GLN       Float    @db.Double
-  pLDDT     Float    @db.Double
-  BSA       Float    @db.Double
-  Core_GLN  Float    @db.Double@map("Core GLN")
-  Symmetry  String
-  Proteome  String
-  File_Url  String
-  Image_Url String   
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  Uniprot_ID String
+  GLN        Float    @db.Double
+  pLDDT      Float    @db.Double
+  BSA        Float    @db.Double
+  Core_GLN   Float    @db.Double
+  Symmetry   String
+  Proteome   String
+  File_Url   String
+  Image_Url  String   
 }
