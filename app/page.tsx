@@ -19,7 +19,7 @@ export default function Home() {
           </p>
           <div className="mb-8">
             <motion.div
-              className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg"
+              className="relative w-full h-full md:h-full rounded-lg overflow-hidden shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -27,6 +27,8 @@ export default function Home() {
                 src='/home.png'
                 alt="Protein structure"
                 className="w-full h-full object-cover"
+                width={500}
+                height={500}
               />
               <Link href="/database">
                 <button

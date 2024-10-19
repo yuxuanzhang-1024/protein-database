@@ -1,7 +1,6 @@
 import NglViwer from '../../ui/viewer';
 import { fetchProteinById } from '../../lib/data';
 import React from "react";
-import { FaInfoCircle} from "react-icons/fa";
 import Link from 'next/link';
 
 export default async function Page({params}: {params: {id: string;}})
@@ -18,7 +17,6 @@ export default async function Page({params}: {params: {id: string;}})
         Core_GLN: [protein.Core_GLN, 'Core GLN'],
         Symmetry: [protein.Symmetry, 'Symmetry'],
         Proteome: [protein.Proteome, 'Proteome'],
-        additionalInfo: ['Additional information about the protein', 'Additional Info']
     };
 
     return (
@@ -29,33 +27,34 @@ export default async function Page({params}: {params: {id: string;}})
                 <tbody>
                   {Object.entries(proteinData).map(([key, value]) => (
                     <tr key={key} className="hover:bg-gray-100 transition-colors duration-200">
-                      <td className="py-3 px-4 border-b border-gray-200 font-semibold text-gray-700 capitalize">
+                      <td className="py-3 px-4 border-b border-gray-200 font-semibold text-gray-800 text-lg capitalize">
                         {value[1]}
                       </td>
-                      <td className="py-3 px-4 border-b border-gray-200 text-gray-600 relative group">
-                        {/* save 4 digits for number */}
+                      <td className="py-3 px-4 border-b border-gray-200 text-gray-500 text-lg relative group ">
                         {typeof value[0] === 'number' ? value[0].toFixed(4) : value[0]}
-                        {key === "additionalInfo" && (
-                          <span className="ml-2 text-blue-500 cursor-pointer">
-                            <FaInfoCircle />
-                            <span className="absolute invisible group-hover:visible bg-blue-600 text-white text-xs rounded py-1 px-2 right-0 bottom-full mb-2 w-48">
-                              {value[0]}
-                            </span>
-                          </span>
-                        )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <Link href={`/database/${id}`}>
-                <button
-                  className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-                  aria-label="Explore more details about the protein"
-                >
-                  Explore More
-                </button>
-              </Link>
+              <div className="flex items-center justify-between">
+                <Link href={protein.File_Url}>
+                  <button
+                    className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    aria-label="Explore more details about the protein"
+                  >
+                    Download
+                  </button>
+                </Link>
+                <Link href={`https://www.uniprot.org/uniprotkb/${protein.Uniprot_ID}/entry`}>
+                  <button
+                    className="mt-6 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    aria-label="Explore more details about the protein"
+                  >
+                    Explore More
+                  </button>
+                </Link>
+              </div>
             </div>
             <div className="md:w-3/5 p-6 flex flex-col items-center justify-center bg-gray-50 overflow-hidden">
                 <NglViwer pdbUrl={protein?.File_Url} persp="cartoon" />

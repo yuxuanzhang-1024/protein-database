@@ -55,6 +55,7 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
       }
       setFilteredProteins(Filter({proteins, filterCondition, prop_type, value}));
       setCurrentPage(1);
+      setCurrentProteins(Filter({proteins, filterCondition, prop_type, value}).slice(0, proteinsPerPage));
     }, 10);
 
     const handleReset = () => {
@@ -76,7 +77,7 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
               onClick={toggleSearch}
               className="bg-blue-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-600 transition duration-300 flex items-center"
             >
-              Search{isSearchVisible ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
+              Filter{isSearchVisible ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
               {/* <FaSearch className="mr-2" /> {isSearchVisible ? "Hide Search" : "Show Search"} */}
             </button>
           </div>

@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from "framer-motion";
 import { FaHome, FaDatabase, FaInfoCircle } from "react-icons/fa";
 export const Header = () => {
@@ -12,7 +13,10 @@ export const Header = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-2xl font-bold">TangleDB</h1>
+        <Link href="/" className='flex items-center'>
+          <Image src="/logo.ico" alt="TangleDB" width={40} height={40}></Image>
+          <h1 className="text-2xl font-bold">TangleDB</h1>
+        </Link>
       </motion.div>
       <nav>
         <motion.ul
