@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { ProteinType, ProteinFilterType } from './definitions';
-import { tr } from 'framer-motion/client';
 
 const prisma = new PrismaClient();
 

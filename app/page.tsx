@@ -3,6 +3,7 @@
 import {NextUIProvider} from "@nextui-org/react";
 import {motion} from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 export default function Home() {
   return (
     <NextUIProvider>
@@ -22,7 +23,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <img
+              <Image
                 src='/home.png'
                 alt="Protein structure"
                 className="w-full h-full object-cover"

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight, FaDownload } from "react-icons/fa";
+import React, { useState} from "react";
 import ProteinCard from "./card";
 import { ProteinType } from "../lib/definitions";
 import { useGenerateProtiensPerPage } from "../lib/utils";
