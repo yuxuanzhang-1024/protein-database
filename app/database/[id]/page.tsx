@@ -2,6 +2,7 @@ import NglViwer from '../../ui/viewer';
 import { fetchProteinById } from '../../lib/data';
 import React from "react";
 import Link from 'next/link';
+import { FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
 
 export default async function Page({params}: {params: {id: string;}})
 {
@@ -40,18 +41,19 @@ export default async function Page({params}: {params: {id: string;}})
               <div className="flex items-center justify-between">
                 <Link href={protein.File_Url}>
                   <button
-                    className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md flex items-center justify-center hover:bg-green-600 transition-colors duration-300"
                     aria-label="Explore more details about the protein"
                   >
+                    <FaDownload className="mr-2" />
                     Download
                   </button>
                 </Link>
                 <Link href={`https://www.uniprot.org/uniprotkb/${protein.Uniprot_ID}/entry`}>
                   <button
-                    className="mt-6 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    className="mt-6 bg-green-500 text-white px-4 py-2 rounded-md flex items-center justify-center hover:bg-green-600 transition-colors duration-300"
                     aria-label="Explore more details about the protein"
                   >
-                    Explore More
+                    <FaExternalLinkAlt className="mr-2" /> Explore More
                   </button>
                 </Link>
               </div>

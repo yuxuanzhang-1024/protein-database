@@ -1,14 +1,15 @@
 'use client';
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import { Filter } from '../lib/data';
 import { ProteinType } from '../lib/definitions';
 import ProteinCard from '../ui/card';
 import { ProteinFilterType } from '../lib/definitions';
 import { useDebouncedCallback } from 'use-debounce';
 import {Slider,Select, SelectItem,Input, Button, Pagination} from "@nextui-org/react";
-import { generateDefaultSearchConfig, symmetryOptions,useGenerateProtiensPerPage  } from '../lib/utils';
+import { generateDefaultSearchConfig, symmetryOptions} from '../lib/utils';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
+import { promises } from 'dns';
 
 
 export default function App({proteins}: {proteins: ProteinType[]}) {
@@ -20,16 +21,40 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [selectedSymmetry, setSelectedSymmetry] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const proteinsPerPage = useGenerateProtiensPerPage();
-    const [currentProteins, setCurrentProteins] = useState(
-      proteins.slice((currentPage - 1) * proteinsPerPage, currentPage * proteinsPerPage)
+    const [proteinsPerPage, setProteinsPerPage] = useState(
+      24
     );
+    const [ismobile, setIsmobile] = useState(false);
+    useEffect(() => {
+      setProteinsPerPage(
+        window.innerWidth < 640 ? 6 : window.innerWidth < 1024 ? 12 : 24
+      );
+      setIsmobile(window.innerWidth < 640);
+      const handleResize = () => {
+        if (window.innerWidth < 640) {
+            setProteinsPerPage(6);
+            setIsmobile(true);
+        } else if (window.innerWidth < 1024) {
+            setProteinsPerPage(12);
+            setIsmobile(false);
+        } else {
+            setProteinsPerPage(24);
+            setIsmobile(false);
+        }
+      }
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, [filteredProteins]);
+
+    const currentProteins = filteredProteins.slice((currentPage - 1) * proteinsPerPage, currentPage * proteinsPerPage);
     const totalPages = Math.ceil(filteredProteins.length / proteinsPerPage);
     const paginate = (pageNumber: number) => {
       setCurrentPage(pageNumber);
-      setCurrentProteins(
-        filteredProteins.slice((pageNumber - 1) * proteinsPerPage, pageNumber * proteinsPerPage)
-      );
+      // setCurrentProteins(
+      //   filteredProteins.slice((pageNumber - 1) * proteinsPerPage, pageNumber * proteinsPerPage)
+      // );
     }
 
     const toggleSearch = () => {
@@ -55,7 +80,7 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
       }
       setFilteredProteins(Filter({proteins, filterCondition, prop_type, value}));
       setCurrentPage(1);
-      setCurrentProteins(Filter({proteins, filterCondition, prop_type, value}).slice(0, proteinsPerPage));
+      // setCurrentProteins(Filter({proteins, filterCondition, prop_type, value}).slice(0, proteinsPerPage));
     }, 10);
 
     const handleReset = () => {
@@ -217,10 +242,11 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
             <div className="flex flex-col gap-5 mt-8 items-center">
               <Pagination
                 showControls
-                size="lg"
+                size="md"
                 total={totalPages}
                 page={currentPage}
                 onChange={paginate}
+                boundaries={1}
               />
             </div>
         </div>
