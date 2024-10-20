@@ -26,9 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white text-blue-900">
+      <body className="min-h-screen w-full bg-white text-blue-900">
         <Header />
-        {children}
+        <div className="mt-24">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>
