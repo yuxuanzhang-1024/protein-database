@@ -9,8 +9,6 @@ import {Slider,Select, SelectItem,Input, Button, Pagination} from "@nextui-org/r
 import { generateDefaultSearchConfig, symmetryOptions} from '../lib/utils';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
-import { promises } from 'dns';
-
 
 export default function App({proteins}: {proteins: ProteinType[]}) {
     const [filteredProteins, setFilteredProteins] = useState(proteins);
@@ -24,22 +22,17 @@ export default function App({proteins}: {proteins: ProteinType[]}) {
     const [proteinsPerPage, setProteinsPerPage] = useState(
       24
     );
-    const [ismobile, setIsmobile] = useState(false);
     useEffect(() => {
       setProteinsPerPage(
         window.innerWidth < 640 ? 6 : window.innerWidth < 1024 ? 12 : 24
       );
-      setIsmobile(window.innerWidth < 640);
       const handleResize = () => {
         if (window.innerWidth < 640) {
             setProteinsPerPage(6);
-            setIsmobile(true);
         } else if (window.innerWidth < 1024) {
             setProteinsPerPage(12);
-            setIsmobile(false);
         } else {
             setProteinsPerPage(24);
-            setIsmobile(false);
         }
       }
       window.addEventListener("resize", handleResize);
