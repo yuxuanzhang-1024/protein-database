@@ -14,8 +14,8 @@ export default async function Page({params}: {params: {id: string;}})
         Uniprot_ID: [protein.Uniprot_ID, 'Uniprot ID'],
         GLN: [protein.GLN.toFixed(4), 'GLN'],
         pLDDT: [protein.pLDDT.toFixed(4), 'pLDDT'],
-        BSA: [protein.BSA.toFixed(4), 'BSA'],
-        Core_GLN: [protein.Core_GLN.toFixed(4)+' Å²', 'Core GLN'],
+        BSA: [protein.BSA.toFixed(4)+' Å²', 'BSA'],
+        Core_GLN: [protein.Core_GLN.toFixed(4), 'Core GLN'],
         // capitalize the first letter of symmetry
         Symmetry: [protein.Symmetry.charAt(0).toUpperCase() + protein.Symmetry.slice(1), 'Symmetry'],
         Proteome: [protein.Proteome, 'Proteome'],
