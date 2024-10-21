@@ -20,7 +20,7 @@ export function Filter({proteins, filterCondition, prop_type, value}: {
       truefilterCondition = { ...filterCondition, [prop_type]: value };
     }  const filteredProteins = proteins.filter((protein) => {
     return (
-      protein.Uniprot_ID.includes(truefilterCondition.Uniprot_ID) &&
+      protein.Uniprot_ID.includes(truefilterCondition.Uniprot_ID.toUpperCase()) &&
       protein.GLN >= truefilterCondition.minGLN &&
       protein.GLN <= truefilterCondition.maxGLN &&
       protein.pLDDT >= truefilterCondition.minpLDDT &&
