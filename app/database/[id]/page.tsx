@@ -12,27 +12,28 @@ export default async function Page({params}: {params: {id: string;}})
     console.log(protein);
     const proteinData = {
         Uniprot_ID: [protein.Uniprot_ID, 'Uniprot ID'],
-        GLN: [protein.GLN, 'GLN'],
-        pLDDT: [protein.pLDDT, 'pLDDT'],
-        BSA: [protein.BSA, 'BSA'],
-        Core_GLN: [protein.Core_GLN, 'Core GLN'],
-        Symmetry: [protein.Symmetry, 'Symmetry'],
+        GLN: [protein.GLN.toFixed(4), 'GLN'],
+        pLDDT: [protein.pLDDT.toFixed(4), 'pLDDT'],
+        BSA: [protein.BSA.toFixed(4), 'BSA'],
+        Core_GLN: [protein.Core_GLN.toFixed(4)+' Å²', 'Core GLN'],
+        // capitalize the first letter of symmetry
+        Symmetry: [protein.Symmetry.charAt(0).toUpperCase() + protein.Symmetry.slice(1), 'Symmetry'],
         Proteome: [protein.Proteome, 'Proteome'],
     };
 
     return (
         <div className="max-w-6xl max-h-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex mt-20 mb-20">
             <div className="md:w-2/5 p-6">
-              <h1 className="text-3xl font-bold mb-6 text-blue-500">Protein Introduction</h1>
+              <h1 className="text-3xl font-bold mb-6 text-blue-500">Protein Information</h1>
               <table className="w-full border-collapse">
                 <tbody>
                   {Object.entries(proteinData).map(([key, value]) => (
                     <tr key={key} className="hover:bg-gray-100 transition-colors duration-200">
-                      <td className="py-3 px-4 border-b border-gray-200 font-semibold text-gray-800 text-lg capitalize">
+                      <td className="py-3 px-4 border-b border-gray-200 font-semibold text-gray-800 text-lg">
                         {value[1]}
                       </td>
                       <td className="py-3 px-4 border-b border-gray-200 text-gray-500 text-lg relative group ">
-                        {typeof value[0] === 'number' ? value[0].toFixed(4) : value[0]}
+                        {value[0]}
                       </td>
                     </tr>
                   ))}
