@@ -22,7 +22,7 @@ export default async function Page({params}: {params: {id: string;}})
     };
 
     return (
-        <div className="max-w-6xl max-h-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex mt-20 mb-20">
+        <div className="max-w-6xl max-h-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:flex mt-40 mb-40">
             <div className="md:w-2/5 p-6">
               <h1 className="text-3xl font-bold mb-6 text-blue-500">Protein Information</h1>
               <table className="w-full border-collapse">
