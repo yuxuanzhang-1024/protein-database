@@ -16,6 +16,8 @@ model Protein {
   Core_GLN   Float    @db.Double
   Symmetry   String
   Proteome   String
+  Local_File_Path   String
+  Local_Image_Path  String
   File_Url   String
   Image_Url  String   
 }
