@@ -4,7 +4,13 @@ import { ProteinType, ProteinFilterType } from './definitions';
 const prisma = new PrismaClient();
 
 export async function fetchAllProteins() {
-  return await prisma.protein.findMany() as ProteinType[];
+  return await prisma.protein.findMany({
+    where: {
+      GLN: {
+        gt: 0.5,
+      },
+    },
+  }) as ProteinType[];
 }
 
 export function Filter({proteins, filterCondition, prop_type, value}: {
