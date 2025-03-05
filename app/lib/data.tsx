@@ -8,12 +8,12 @@ export async function fetchAllProteins() {
     where: {
       OR: [
         {
-          GLN: {
+          Core_GLN: {
             lt: -0.5,
           },
         },
         {
-          GLN: {
+          Core_GLN: {
             gt: 0.5,
           },
         },
