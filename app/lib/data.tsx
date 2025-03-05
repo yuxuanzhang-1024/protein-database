@@ -6,9 +6,18 @@ const prisma = new PrismaClient();
 export async function fetchAllProteins() {
   return await prisma.protein.findMany({
     where: {
-      GLN: {
-        gt: 0.5,
-      },
+      OR: [
+        {
+          GLN: {
+            lt: -0.5,
+          },
+        },
+        {
+          GLN: {
+            gt: 0.5,
+          },
+        },
+      ],
     },
   }) as ProteinType[];
 }
